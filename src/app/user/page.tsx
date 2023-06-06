@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { userSchema } from '~/app/utils/schemas/user';
+import { userSchema } from '~/app/utils/schemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputMask from 'react-input-mask';
 import Link from 'next/link';
@@ -34,9 +34,9 @@ const page = () => {
           <InputMask
             type="tel"
             mask="+7 (999) 999-99-99"
-            id="phone"
-            {...register('phone', { required: true, pattern: /\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}/ })}
+            {...register('phone')}
             placeholder="+7 (___) ___-__-__"
+            required
           />
 
           {errors.phone && errors.phone.message}
@@ -44,15 +44,7 @@ const page = () => {
 
         <div>
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            {...register('email', {
-              required: true,
-              pattern: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/,
-            })}
-            placeholder="johndoe@example.com"
-          />
+          <input type="email" {...register('email')} placeholder="johndoe@example.com" required />
 
           {errors.email && errors.email.message}
         </div>
@@ -68,7 +60,7 @@ const page = () => {
         )}
 
         <Link href="/info">
-          <button id="link-info" onClick={handleClick}>
+          <button id="button-start" onClick={handleClick}>
             Начать
           </button>
         </Link>
