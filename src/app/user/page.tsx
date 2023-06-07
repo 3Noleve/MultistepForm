@@ -5,7 +5,7 @@ import { userSchema } from '~/app/utils/schemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputMask from 'react-input-mask';
 import Link from 'next/link';
-import { UserFormInputs } from '~/app/types/UserFormInputs';
+import { UserFormInputs } from '~/app/types';
 
 const page = () => {
   const {
@@ -18,9 +18,9 @@ const page = () => {
     console.log(data);
   };
 
-  const handleClick = (event: React.FormEvent) => {
+  const handleClick = (e: React.FormEvent) => {
     if (!isValid) {
-      event.preventDefault();
+      e.preventDefault();
 
       console.warn('Пожалуйста, заполните все поля формы');
     }
@@ -35,7 +35,7 @@ const page = () => {
             type="tel"
             mask="+7 (999) 999-99-99"
             {...register('phone')}
-            placeholder="+7 (___) ___-__-__"
+            placeholder="+7 (999) 999-99-99"
             required
           />
 
@@ -59,7 +59,7 @@ const page = () => {
           </button>
         )}
 
-        <Link href="/info">
+        <Link href="/forms">
           <button id="button-start" onClick={handleClick}>
             Начать
           </button>

@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { InfoFormInputs } from '~/app/types/InfoFormInputs';
+import { InfoFormInputs } from '~/app/types';
 import { infoSchema } from '~/app/utils/schemas';
 
 const page = () => {
@@ -74,6 +74,8 @@ const page = () => {
 
           {errors.sex && errors.sex.message}
         </div>
+
+        <button type="button">Назад</button>
 
         <button type="submit">Далее</button>
       </form>
