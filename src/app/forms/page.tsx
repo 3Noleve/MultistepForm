@@ -1,44 +1,39 @@
 'use client';
 
-import { FC, useState } from 'react';
 import InfoPage from '~/app/forms/_info/page';
-import { FormStep } from '~/app/types';
-import { useAppDispatch } from '~/app/redux/hooks';
-import { setStep, setData } from '~/app/redux/features/formSlice';
+import AdvantagesPage from '~/app/forms/_advantages/page';
 
-interface FormProps {
-  steps: FormStep[];
-}
+import { Steper } from '~/app/components/Steper';
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks';
 
-const steps: FormStep[] = [
-  { step: 0, component: <InfoPage /> },
-  { step: 1, component: <InfoPage /> },
-  { step: 2, component: <InfoPage /> },
-];
-
-const page: FC<FormProps> = ({ steps }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+const page = () => {
+  const { step } = useAppSelector((state) => state.FormReducer);
 
   const dispatch = useAppDispatch();
 
-  // const curStep = steps.find((formStep) => formStep.step === currentStep);
+  let currentPage: React.ReactNode;
 
-  const handleNext = () => {
-    dispatch(setStep(currentStep + 1));
+  switch (step) {
+    case 1:
+      currentPage = <InfoPage />;
+      break;
+    case 2:
+      currentPage = <AdvantagesPage />;
+      break;
+    case 3:
+      currentPage = <div>About Page</div>;
+      break;
 
-    setCurrentStep((currentStep) => currentStep + 1);
-  };
-
-  const handleBack = () => {
-    dispatch(setStep(currentStep - 1));
-
-    setCurrentStep((currentStep) => currentStep - 1);
-  };
+    default:
+      return `${step} нету такого шага`;
+  }
 
   return (
     <div>
       This is root (forms page)
-      {/* {curStep?.component} */}
+      {/* {currentPage} */}
+      <AdvantagesPage />
+      {/* <Steper step={step} /> */}
     </div>
   );
 };

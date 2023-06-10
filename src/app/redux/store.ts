@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
-import FormReducer from '~/app/redux/features/formSlice';
+import FormReducer from '~/app/redux/features/infoFormSlice';
 
 const rootReducer = combineReducers({
   FormReducer,

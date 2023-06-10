@@ -1,13 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { InfoFormInputs } from '~/app/types';
 
-type FormState<T> = {
+interface FormState {
   step: number;
-  data: Record<string, T>;
-};
+  data: InfoFormInputs;
+}
 
-const initialState: FormState<string | number | string[] | number[]> = {
-  step: 0,
-  data: {},
+interface FormPayload {
+  name: keyof InfoFormInputs;
+  value: any;
+}
+
+const initialState: FormState = {
+  step: 1,
+  data: {
+    nickname: '',
+    name: '',
+    surname: '',
+    sex: '',
+  },
 };
 
 const formSlice = createSlice({
@@ -18,7 +29,7 @@ const formSlice = createSlice({
       state.step = action.payload;
     },
 
-    setData(state, action: PayloadAction<{ name: string; value: any }>) {
+    setData(state, action: PayloadAction<FormPayload>) {
       const { name, value } = action.payload;
 
       state.data[name] = value;
