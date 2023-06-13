@@ -1,7 +1,11 @@
 export interface InfoFormInputs {
-  [key: string]: string;
   nickname: string;
   name: string;
   surname: string;
-  sex: string;
+  sex: 'man' | 'woman';
+}
+
+export enum UserSex {
+  man = 'man',
+  woman = 'woman',
 }

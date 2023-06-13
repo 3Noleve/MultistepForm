@@ -1,5 +1,5 @@
 import styles from './page.module.css';
-import AboutMeForm from '~/app/user/page';
+import AboutMeForm from '~/app/auth/page';
 
 export default function Home() {
   return (

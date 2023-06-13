@@ -1,18 +1,21 @@
 import * as Yup from 'yup';
+import { InfoFormInputs } from '~/app/types';
 
 export const infoSchema = Yup.object({
   nickname: Yup.string()
-    .max(30, 'Must be 30 characters or less')
-    .matches(/^[a-zA-Zа-яА-Я0-9 ]+$/, 'Only letters and digits are allowed')
-    .required('Nickname is required'),
+    .required('Поле обязательно')
+    .max(30, 'Максимальная длина 30 символов')
+    .matches(/^[а-яА-ЯёЁ0-9a-zA-Z]+$/, 'Может содержать только буквы и цифры'),
   name: Yup.string()
-    .max(50, 'Must be 50 characters or less')
-    .matches(/^[a-zA-Zа-яА-Я ]+$/, 'Only letters are allowed')
-    .required('Name is required'),
+    .required('Поле обязательно')
+    .max(50, 'Максимальная длина 50 символов')
+    .matches(/^[а-яА-ЯёЁa-zA-Z]+$/, 'Может содержать только буквы'),
   surname: Yup.string()
-    .max(50, 'Must be 50 characters or less')
-    .matches(/^[a-zA-Zа-яА-Я ]+$/, 'Only letters are allowed')
-    .required('Surname is required'),
+    .required('Поле обязательно')
+    .max(50, 'Максимальная длина 50 символов')
+    .matches(/^[а-яА-ЯёЁa-zA-Z]+$/, 'Может содержать только буквы'),
 
-  sex: Yup.mixed().oneOf(['man', 'woman'], 'Invalid value').required('Gender is required'),
+  sex: Yup.mixed<InfoFormInputs['sex']>()
+    .required('Поле обязательно')
+    .oneOf(['man', 'woman'], 'Значение должно быть "man" или "woman"'),
 });

@@ -1,54 +1,57 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { memo } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks';
-import { setData, setStep } from '~/app/redux/features/infoFormSlice';
+import { setName, setNickname, setSurname, setSex } from '~/app/redux/features/FormSlice';
+import { setCurrentStep } from '~/app/redux/features/StepSlice';
 import { InfoFormInputs } from '~/app/types';
 import { infoSchema } from '~/app/utils/schemas';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
-const page = () => {
-  const { data, step } = useAppSelector((state) => state.FormReducer);
+export const metadata: Metadata = {
+  title: 'Введите свои данные...',
+  description: 'Это страница Info',
+};
+
+const page = memo(() => {
+  const { sex, name, surname, nickname } = useAppSelector((state) => state.FormReducer);
+  const { currentStep } = useAppSelector((state) => state.StepReducer);
 
   const dispatch = useAppDispatch();
-
-  const [formData, setFormData] = useState<InfoFormInputs>({
-    nickname: data.nickname || '',
-    name: data.name || '',
-    sex: data.sex || '',
-    surname: data.surname || '',
-  });
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isValid },
-  } = useForm<InfoFormInputs>({ resolver: yupResolver(infoSchema) });
+  } = useForm<InfoFormInputs>({
+    resolver: yupResolver(infoSchema),
+    defaultValues: {
+      sex,
+      name: name!,
+      nickname: nickname!,
+      surname: surname!,
+    },
+  });
 
-  const onSubmit = () => {
-    console.log(data);
-  };
+  const onSubmitHandler: SubmitHandler<InfoFormInputs> = (data) => {
+    if (isValid) {
+      dispatch(setName(data.name));
+      dispatch(setNickname(data.nickname));
+      dispatch(setSurname(data.surname));
+      dispatch(setSex(data.sex));
+      dispatch(setCurrentStep(currentStep + 1));
+    }
 
-  const handleNextStep = () => {
-    isValid && dispatch(setStep(step + 1));
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    dispatch(setData({ name, value }));
+    console.log({ ...data });
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
         <div>
           <label htmlFor="nickname">Nickname</label>
 
@@ -57,8 +60,6 @@ const page = () => {
             id="field-nickname"
             placeholder="Введите ник..."
             {...register('nickname')}
-            value={formData.nickname}
-            onChange={handleInputChange}
             required
           />
 
@@ -72,8 +73,6 @@ const page = () => {
             id="field-name"
             placeholder="Введите имя..."
             {...register('name')}
-            value={formData.name}
-            onChange={handleInputChange}
             required
           />
 
@@ -87,8 +86,6 @@ const page = () => {
             id="field-surname"
             placeholder="Введите фамилию..."
             {...register('surname')}
-            value={formData.surname}
-            onChange={handleInputChange}
             required
           />
 
@@ -97,22 +94,24 @@ const page = () => {
         <div>
           <label htmlFor="sex">Sex</label>
 
-          <select id="field-sex" {...register('sex')} required>
-            <option value="man" id="field-sex-option-man">
-              Man
-            </option>
-            <option value="woman" id="field-sex-option-woman">
-              Woman
-            </option>
-          </select>
-          {/* //! не указывется какой пол у пользователя */}
+          <Controller
+            name="sex"
+            control={control}
+            render={({ field }) => (
+              <select {...field} id="field-sex" required>
+                <option value="man" id="field-sex-option-man">
+                  Man
+                </option>
+                <option value="woman" id="field-sex-option-woman">
+                  Woman
+                </option>
+              </select>
+            )}></Controller>
 
           {errors.sex && errors.sex.message}
         </div>
 
-        <button type="submit" onClick={handleNextStep}>
-          Далее
-        </button>
+        <button type="submit">Далее</button>
 
         <Link href="/">
           <button>Назад</button>
@@ -120,6 +119,6 @@ const page = () => {
       </form>
     </div>
   );
-};
+});
 
 export default page;

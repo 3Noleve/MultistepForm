@@ -1,9 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
-import FormReducer from '~/app/redux/features/infoFormSlice';
+import FormReducer from '~/app/redux/features/FormSlice';
+import StepReducer from '~/app/redux/features/StepSlice';
 
 const rootReducer = combineReducers({
   FormReducer,
+  StepReducer,
 });
 
 export const setupStore = () => {

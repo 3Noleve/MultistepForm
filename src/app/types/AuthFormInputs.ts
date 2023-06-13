@@ -1,4 +1,4 @@
-export interface UserFormInputs {
+export interface AuthFormInputs {
   phone: string;
   email: string;
 }
