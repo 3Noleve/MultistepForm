@@ -9,3 +9,4 @@
 * Redux-Toolkit
 * React-hook-form
 * Yup
+* shadcn/ui
