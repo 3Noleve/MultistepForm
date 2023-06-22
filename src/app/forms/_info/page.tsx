@@ -1,124 +1,136 @@
-'use client';
+'use client'
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { memo } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks';
-import { setName, setNickname, setSurname, setSex } from '~/app/redux/features/FormSlice';
-import { setCurrentStep } from '~/app/redux/features/StepSlice';
-import { InfoFormInputs } from '~/app/types';
-import { infoSchema } from '~/app/utils/schemas';
-import Link from 'next/link';
-import { Metadata } from 'next';
+import { yupResolver } from '@hookform/resolvers/yup'
+import { memo, useEffect } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
+import { FormSliceActions } from '~/app/redux/features/FormSlice'
+import { StatusActions } from '~/app/redux/features/StepSlice'
+import { InfoFormInputs } from '~/app/types'
+import { infoSchema } from '~/lib/schemas'
+import Link from 'next/link'
+import { Metadata } from 'next'
+import { Button, Flex, FormField, Input, Select } from '~/components/ui'
+import { Options } from '~/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Введите свои данные...',
-  description: 'Это страница Info',
-};
+  description: 'Это страница Info'
+}
 
 const page = memo(() => {
-  const { sex, name, surname, nickname } = useAppSelector((state) => state.FormReducer);
-  const { currentStep } = useAppSelector((state) => state.StepReducer);
+  const { sex, name, surname, nickname } = useAppSelector(
+    (state) => state.FormReducer
+  )
+  const { currentStep } = useAppSelector((state) => state.StepReducer)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const {
     register,
     handleSubmit,
+    getValues,
     control,
-    formState: { errors, isValid },
+    formState: { errors, isValid }
   } = useForm<InfoFormInputs>({
     resolver: yupResolver(infoSchema),
     defaultValues: {
       sex,
       name: name!,
       nickname: nickname!,
-      surname: surname!,
-    },
-  });
+      surname: surname!
+    }
+  })
 
   const onSubmitHandler: SubmitHandler<InfoFormInputs> = (data) => {
     if (isValid) {
-      dispatch(setName(data.name));
-      dispatch(setNickname(data.nickname));
-      dispatch(setSurname(data.surname));
-      dispatch(setSex(data.sex));
-      dispatch(setCurrentStep(currentStep + 1));
+      dispatch(StatusActions.setCurrentStep(currentStep + 1))
     }
 
-    console.log({ ...data });
-  };
+    console.log({ ...data })
+  }
+
+  useEffect(() => {
+    return () => {
+      const { name, nickname, surname, sex } = getValues()
+
+      dispatch(FormSliceActions.setName(name))
+      dispatch(FormSliceActions.setNickname(nickname))
+      dispatch(FormSliceActions.setSurname(surname))
+      dispatch(FormSliceActions.setSex(sex))
+
+      console.log(name, nickname, surname, sex)
+    }
+  }, [])
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div>
-          <label htmlFor="nickname">Nickname</label>
+    <form onSubmit={handleSubmit(onSubmitHandler)}>
+      <Flex
+        direction={'column'}
+        gap={32}
+        align={'start'}
+        className='mb-[88px]'
+      >
+        <Input
+          label='Nickname'
+          type='text'
+          id='field-nickname'
+          placeholder='Введите ник...'
+          error={errors.nickname}
+          {...register('nickname')}
+          // required
+        />
 
-          <input
-            type="text"
-            id="field-nickname"
-            placeholder="Введите ник..."
-            {...register('nickname')}
-            required
-          />
+        <Input
+          label='Name'
+          type='text'
+          id='field-name'
+          placeholder='Введите имя...'
+          error={errors.name}
+          {...register('name')}
+          // required
+        />
 
-          {errors.nickname && errors.nickname.message}
-        </div>
-        <div>
-          <label htmlFor="name">Name</label>
+        <Input
+          label='Surname'
+          type='text'
+          id='field-surname'
+          placeholder='Введите фамилию...'
+          error={errors.surname}
+          {...register('surname')}
+          // required
+        />
 
-          <input
-            type="text"
-            id="field-name"
-            placeholder="Введите имя..."
-            {...register('name')}
-            required
-          />
+        <FormField
+          name='sex'
+          control={control}
+          render={({ field }) => (
+            <Select
+              options={Options}
+              label={'Sex'}
+              error={errors.sex}
+              id='field-sex'
+              {...register('sex')}
+              {...field}
+            />
+          )}
+        />
+      </Flex>
 
-          {errors.name && errors.name.message}
-        </div>
-        <div>
-          <label htmlFor="surname">Surname</label>
-
-          <input
-            type="text"
-            id="field-surname"
-            placeholder="Введите фамилию..."
-            {...register('surname')}
-            required
-          />
-
-          {errors.surname && errors.surname.message}
-        </div>
-        <div>
-          <label htmlFor="sex">Sex</label>
-
-          <Controller
-            name="sex"
-            control={control}
-            render={({ field }) => (
-              <select {...field} id="field-sex" required>
-                <option value="man" id="field-sex-option-man">
-                  Man
-                </option>
-                <option value="woman" id="field-sex-option-woman">
-                  Woman
-                </option>
-              </select>
-            )}></Controller>
-
-          {errors.sex && errors.sex.message}
-        </div>
-
-        <button type="submit">Далее</button>
-
-        <Link href="/">
-          <button>Назад</button>
+      <Flex
+        direction={'row'}
+        justify={'between'}
+        gap={8}
+        fill
+      >
+        <Link href='/'>
+          <Button variant={'outline'}>Назад</Button>
         </Link>
-      </form>
-    </div>
-  );
-});
 
-export default page;
+        <Button type='submit'>Далее</Button>
+      </Flex>
+    </form>
+  )
+})
+
+export default page

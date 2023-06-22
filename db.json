@@ -1,0 +1,52 @@
+{
+  "posts": [
+    {
+      "nickname": "3NoLeve",
+      "name": "Прохор",
+      "surname": "Спиркин",
+      "sex": "man",
+      "advantages": [
+        "Advantage",
+        "Advantage",
+        "Advantage"
+      ],
+      "checkbox": [
+        "2"
+      ],
+      "radio": 2,
+      "about": "some text",
+      "email": "prohoreddinson@gmail.com",
+      "phone": "71111111111",
+      "id": 1
+    },
+    {
+      "nickname": "3NoLeve",
+      "name": "Прохор",
+      "surname": "Спиркин",
+      "sex": "man",
+      "advantages": [
+        "Advantage",
+        "Advantage",
+        "Advantage"
+      ],
+      "checkbox": [
+        2
+      ],
+      "radio": 3,
+      "about": "Что-то",
+      "email": "prohoreddinson@gmail.com",
+      "phone": "71212121212",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

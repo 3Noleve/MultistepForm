@@ -1,72 +1,104 @@
-'use client';
+'use client'
 
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks';
-import { setAbout } from '~/app/redux/features/FormSlice';
-import { setCurrentStep } from '~/app/redux/features/StepSlice';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { AboutFormInput } from '~/app/types';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { aboutSchema } from '~/app/utils/schemas';
-import { useCallback } from 'react';
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
+import { FormSliceActions } from '~/app/redux/features/FormSlice'
+import { StatusActions } from '~/app/redux/features/StepSlice'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { AboutFormInput } from '~/app/types'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { aboutSchema } from '~/lib/schemas'
+import { useCallback, useEffect } from 'react'
+import { Button, Flex, Textarea } from '~/components/ui'
 
 const page = () => {
-  const { about } = useAppSelector((state) => state.FormReducer);
-  const { currentStep } = useAppSelector((state) => state.StepReducer);
+  const { about } = useAppSelector((state) => state.FormReducer)
+  const { currentStep } = useAppSelector((state) => state.StepReducer)
 
-  const formData = useAppSelector((state) => state.FormReducer);
+  const formData = useAppSelector((state) => state.FormReducer)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isValid },
-    watch,
+    watch
   } = useForm<AboutFormInput>({
     mode: 'all',
     resolver: yupResolver(aboutSchema),
     defaultValues: {
-      field: about || '',
-    },
-  });
+      field: about || ''
+    }
+  })
 
-  const charsLength = watch('field').replace(/\s+/g, '').length;
+  const charsLength = watch('field').replace(/\s+/g, '').length
 
-  const onSubmitHandler: SubmitHandler<AboutFormInput> = (data) => {
-    const message = data.field.replace(/\s+/g, ' ');
+  const onSubmitHandler: SubmitHandler<AboutFormInput> = async (data) => {
+    const message = data.field.replace(/\s+/g, ' ')
+
+    dispatch(FormSliceActions.setAbout(message))
 
     if (isValid) {
-      dispatch(setAbout(message));
+      const response = await fetch('http://localhost:3004/posts', {
+        method: 'POST',
+        body: JSON.stringify({ ...formData, about: message }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
 
-      console.log({ formData });
+      if (!response.ok) {
+        return console.warn('Error')
+      }
     }
-  };
+  }
 
   const handlePrevStep = useCallback(() => {
-    dispatch(setCurrentStep(currentStep - 1));
-  }, [currentStep]);
+    dispatch(StatusActions.setCurrentStep(currentStep - 1))
+  }, [currentStep])
+
+  useEffect(() => {
+    return () => {
+      const { field } = getValues()
+
+      dispatch(FormSliceActions.setAbout(field))
+    }
+  }, [])
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div>
-          <label htmlFor="About">About</label>
-          <textarea
-            placeholder="Введите текст..."
-            cols={100}
-            rows={5}
-            style={{ resize: 'none' }}
-            {...register('field')}
-          />
-          <span>{charsLength}</span>
-          {errors.field && errors.field.message}
-        </div>
+    <form onSubmit={handleSubmit(onSubmitHandler)}>
+      <Flex
+        direction={'column'}
+        align={'start'}
+        gap={24}
+      >
+        <Textarea
+          placeholder='Введите текст...'
+          style={{ resize: 'none' }}
+          label='About'
+          error={errors.field}
+          chars={charsLength}
+          {...register('field')}
+        />
 
-        <button onClick={handlePrevStep}>Назад</button>
-        <button type="submit">Отправить</button>
-      </form>
-    </div>
-  );
-};
+        <Flex
+          direction={'row'}
+          justify={'between'}
+          gap={8}
+          fill
+        >
+          <Button
+            variant={'outline'}
+            onClick={handlePrevStep}
+          >
+            Назад
+          </Button>
+          <Button type='submit'>Отправить</Button>
+        </Flex>
+      </Flex>
+    </form>
+  )
+}
 
-export default page;
+export default page

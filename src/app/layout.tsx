@@ -1,20 +1,33 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
-import { ReduxProviders } from '~/app/redux/provider';
+import { Inter as FontSans } from 'next/font/google'
+import { ReduxProvider } from '~/app/redux/provider'
+import '../styles/globals.css'
+import { cn } from '~/lib/utils'
 
-const inter = Inter({ subsets: ['latin'] });
+const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans'
+})
 
 export const metadata = {
   title: 'Главная страница',
-  description: 'Введите свои данные',
-};
+  description: 'Введите свои данные'
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ReduxProviders>{children}</ReduxProviders>
+    <html lang='en'>
+      <body
+        className={cn(
+          'max-w-4xl m-auto px-4 min-h-screen bg-background font-sans antialiased bg-gray-300',
+          fontSans.variable
+        )}
+      >
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
-  );
+  )
 }
