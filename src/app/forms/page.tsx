@@ -26,17 +26,7 @@ const page = () => {
       return `${currentStep} нету такого шага`
   }
 
-  return (
-    <div className='w-full'>
-      {currentPage}
-
-      {/* <InfoPage /> */}
-
-      {/* <AdvantagesPage /> */}
-
-      {/* <AboutPage /> */}
-    </div>
-  )
+  return <div className='w-full'>{currentPage}</div>
 }
 
 export default page

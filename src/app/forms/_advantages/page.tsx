@@ -1,18 +1,24 @@
 'use client'
 
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
-import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { memo, useCallback, useEffect } from 'react'
-import { AdvantagesFormInputs } from '~/app/types'
+
 import {
   SubmitHandler,
   useController,
   useFieldArray,
   useForm
 } from 'react-hook-form'
+
 import { yupResolver } from '@hookform/resolvers/yup'
-import { advantagesSchema } from '~/lib/schemas'
+
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { StatusActions } from '~/app/redux/features/StepSlice'
+import { FormSliceActions } from '~/app/redux/features/FormSlice'
+
+import { AdvantagesFormInputs } from '~/app/types'
+
+import { advantagesSchema } from '~/lib/schemas'
+
 import {
   Label,
   Input,
@@ -22,9 +28,10 @@ import {
   Checkbox,
   Radio
 } from '~/components/ui'
+
 import { Trash2Icon, Plus } from 'lucide-react'
 
-const page = memo(() => {
+const page = () => {
   const { advantages, checkbox, radio } = useAppSelector(
     (state) => state.FormReducer
   )
@@ -68,14 +75,6 @@ const page = memo(() => {
     defaultValue: undefined
   })
 
-  const onSubmitHandler: SubmitHandler<AdvantagesFormInputs> = (data) => {
-    if (isValid) {
-      dispatch(StatusActions.setCurrentStep(currentStep + 1))
-
-      console.log({ ...data })
-    }
-  }
-
   const handleRemoveField = useCallback(
     (index: number) => {
       remove(index)
@@ -115,6 +114,12 @@ const page = memo(() => {
     }
   }, [])
 
+  const onSubmitHandler: SubmitHandler<AdvantagesFormInputs> = () => {
+    if (isValid) {
+      dispatch(StatusActions.setCurrentStep(currentStep + 1))
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <Flex
@@ -128,6 +133,7 @@ const page = memo(() => {
           align={'start'}
         >
           <Label>Advantages</Label>
+
           {fields.map((advantage, index) => (
             <div>
               <FormField
@@ -235,6 +241,6 @@ const page = memo(() => {
       </Flex>
     </form>
   )
-})
+}
 
 export default page

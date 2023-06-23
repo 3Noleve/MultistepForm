@@ -1,24 +1,20 @@
 'use client'
 
-import { yupResolver } from '@hookform/resolvers/yup'
-import { memo, useEffect } from 'react'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import Link from 'next/link'
+
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { StatusActions } from '~/app/redux/features/StepSlice'
 import { InfoFormInputs } from '~/app/types'
 import { infoSchema } from '~/lib/schemas'
-import Link from 'next/link'
-import { Metadata } from 'next'
-import { Button, Flex, FormField, Input, Select } from '~/components/ui'
 import { Options } from '~/lib/constants'
 
-export const metadata: Metadata = {
-  title: 'Введите свои данные...',
-  description: 'Это страница Info'
-}
+import { Button, Flex, FormField, Input, Select } from '~/components/ui'
 
-const page = memo(() => {
+const page = () => {
   const { sex, name, surname, nickname } = useAppSelector(
     (state) => state.FormReducer
   )
@@ -42,12 +38,10 @@ const page = memo(() => {
     }
   })
 
-  const onSubmitHandler: SubmitHandler<InfoFormInputs> = (data) => {
+  const onSubmitHandler: SubmitHandler<InfoFormInputs> = () => {
     if (isValid) {
       dispatch(StatusActions.setCurrentStep(currentStep + 1))
     }
-
-    console.log({ ...data })
   }
 
   useEffect(() => {
@@ -58,8 +52,6 @@ const page = memo(() => {
       dispatch(FormSliceActions.setNickname(nickname))
       dispatch(FormSliceActions.setSurname(surname))
       dispatch(FormSliceActions.setSex(sex))
-
-      console.log(name, nickname, surname, sex)
     }
   }, [])
 
@@ -78,7 +70,7 @@ const page = memo(() => {
           placeholder='Введите ник...'
           error={errors.nickname}
           {...register('nickname')}
-          // required
+          required
         />
 
         <Input
@@ -88,7 +80,7 @@ const page = memo(() => {
           placeholder='Введите имя...'
           error={errors.name}
           {...register('name')}
-          // required
+          required
         />
 
         <Input
@@ -98,7 +90,7 @@ const page = memo(() => {
           placeholder='Введите фамилию...'
           error={errors.surname}
           {...register('surname')}
-          // required
+          required
         />
 
         <FormField
@@ -131,6 +123,6 @@ const page = memo(() => {
       </Flex>
     </form>
   )
-})
+}
 
 export default page

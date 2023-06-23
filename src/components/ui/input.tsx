@@ -10,8 +10,6 @@ export interface InputProps
   error?: FieldError
 }
 
-//! Сделать разные размеры инпута
-
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, label, error, ...props }, ref) => {
     return (

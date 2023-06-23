@@ -43,12 +43,10 @@ const AuthForm = () => {
     formState: { isValid, errors, isSubmitting }
   } = form
 
-  const onSubmitHandler: SubmitHandler<AuthFormInputs> = (data) => {
+  const onSubmitHandler: SubmitHandler<AuthFormInputs> = () => {
     if (isValid) {
       router.push('/forms')
     }
-
-    console.log({ ...data })
   }
 
   useEffect(() => {
@@ -82,13 +80,14 @@ const AuthForm = () => {
                 mask='+7 (999) 999-99-99'
                 placeholder='+7 (800) 555-35-35'
                 error={errors.phone}
-                // required
+                required
                 {...field}
               />
             )}
           />
 
           <Input
+            disabled
             {...register('email')}
             placeholder='johndoe@gmail.com'
             label='Email'

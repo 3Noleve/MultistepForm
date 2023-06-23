@@ -4,7 +4,7 @@ import AuthPage from '~/app/auth/auth'
 const HomePage = () => {
   return (
     <>
-      <Profile fullName='Спиркин Прохор' />
+      <Profile fullName={'Спиркин Прохор'} />
 
       <AuthPage />
     </>
