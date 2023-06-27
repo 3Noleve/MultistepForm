@@ -1,4 +1,8 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
 import { Avatar, Flex, Label } from '../ui'
+import Link from 'next/link'
 
 interface Socials {
   url: string
@@ -11,6 +15,8 @@ interface ProfileProps {
 }
 
 export const Profile = ({ fullName, socials }: ProfileProps) => {
+  const router = useRouter()
+
   const initials = fullName.split(' ') as [string, string]
 
   return (
@@ -20,12 +26,13 @@ export const Profile = ({ fullName, socials }: ProfileProps) => {
       gap={24}
       className='mb-6 pb-6'
     >
-      <Avatar
-        initials={initials}
-        // src={'https://avatars.githubusercontent.com/u/106100900?v=4'}
-      />
+      <Link href={'https://github.com/3Noleve'}>
+        <Avatar
+          initials={initials}
+          src={'https://avatars.githubusercontent.com/u/106100900?v=4'}
+        />
+      </Link>
 
-      {/* <Flex> */}
       <div>
         <Label className='text-xl'>{fullName}</Label>
       </div>
@@ -39,7 +46,6 @@ export const Profile = ({ fullName, socials }: ProfileProps) => {
           Lorem
         </Flex>
       )}
-      {/* </Flex> */}
     </Flex>
   )
 }

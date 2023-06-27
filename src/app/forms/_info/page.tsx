@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import useFormPersist from 'react-hook-form-persist'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 
@@ -10,7 +11,7 @@ import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { StatusActions } from '~/app/redux/features/StepSlice'
 import { InfoFormInputs } from '~/app/types'
 import { infoSchema } from '~/lib/schemas'
-import { Options } from '~/lib/constants'
+import { SelectOptions } from '~/lib/constants'
 
 import { Button, Flex, FormField, Input, Select } from '~/components/ui'
 
@@ -27,6 +28,8 @@ const page = () => {
     handleSubmit,
     getValues,
     control,
+    watch,
+    setValue,
     formState: { errors, isValid }
   } = useForm<InfoFormInputs>({
     resolver: yupResolver(infoSchema),
@@ -37,6 +40,8 @@ const page = () => {
       surname: surname!
     }
   })
+
+  useFormPersist('info-form', { watch, setValue, storage: window.localStorage })
 
   const onSubmitHandler: SubmitHandler<InfoFormInputs> = () => {
     if (isValid) {
@@ -94,18 +99,17 @@ const page = () => {
         />
 
         <FormField
-          name='sex'
-          control={control}
           render={({ field }) => (
             <Select
-              options={Options}
+              {...field}
+              options={SelectOptions}
               label={'Sex'}
               error={errors.sex}
               id='field-sex'
-              {...register('sex')}
-              {...field}
             />
           )}
+          name='sex'
+          control={control}
         />
       </Flex>
 

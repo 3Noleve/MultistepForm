@@ -9,6 +9,8 @@ import {
   useForm
 } from 'react-hook-form'
 
+import useFormPersist from 'react-hook-form-persist'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
@@ -43,6 +45,8 @@ const page = () => {
     handleSubmit,
     control,
     getValues,
+    watch,
+    setValue,
     formState: { errors, isValid }
   } = useForm<AdvantagesFormInputs>({
     mode: 'all',
@@ -52,6 +56,12 @@ const page = () => {
       radio: radio!,
       advantages: advantages
     }
+  })
+
+  useFormPersist('advantages-form', {
+    watch,
+    setValue,
+    storage: window.localStorage
   })
 
   const { fields, append, remove } = useFieldArray({

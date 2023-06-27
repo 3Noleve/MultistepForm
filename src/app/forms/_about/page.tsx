@@ -1,16 +1,22 @@
 'use client'
 
+import { useCallback, useEffect, useMemo } from 'react'
+import { useRouter } from 'next/navigation'
+
+import { SubmitHandler, useForm } from 'react-hook-form'
+
+import useFormPersist from 'react-hook-form-persist'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { StatusActions } from '~/app/redux/features/StepSlice'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { AboutFormInput } from '~/app/types'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { aboutSchema } from '~/lib/schemas'
-import { useCallback, useEffect } from 'react'
 import { Button, Flex, Textarea } from '~/components/ui'
 
 const page = () => {
+  const router = useRouter()
+
   const { about } = useAppSelector((state) => state.FormReducer)
   const { currentStep } = useAppSelector((state) => state.StepReducer)
 
@@ -22,6 +28,8 @@ const page = () => {
     register,
     handleSubmit,
     getValues,
+    setValue,
+    reset,
     formState: { errors, isValid },
     watch
   } = useForm<AboutFormInput>({
@@ -31,6 +39,22 @@ const page = () => {
       field: about || ''
     }
   })
+
+  useFormPersist('about-form', {
+    watch,
+    setValue,
+    storage: window.localStorage
+  })
+
+  const clearLocalStorage = useMemo(() => {
+    return () => {
+      Object.keys(window.localStorage).forEach((key) => {
+        if (key.includes('-form')) {
+          window.localStorage.removeItem(key)
+        }
+      })
+    }
+  }, [])
 
   const charsLength = watch('field').replace(/\s+/g, '').length
 
@@ -51,6 +75,12 @@ const page = () => {
       if (!response.ok) {
         return console.warn('Error')
       }
+
+      clearLocalStorage()
+
+      reset()
+
+      router.push('/')
     }
   }
 
@@ -75,10 +105,10 @@ const page = () => {
       >
         <Textarea
           placeholder='Введите текст...'
-          style={{ resize: 'none' }}
           label='About'
           error={errors.field}
           chars={charsLength}
+          maxChars={200}
           {...register('field')}
         />
 

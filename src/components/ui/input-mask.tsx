@@ -1,9 +1,9 @@
 'use client'
 
 import { forwardRef } from 'react'
+import ReactInputMask from 'react-input-mask'
 import { InputProps } from './input'
 import { Flex, Label } from '.'
-import ReactInputMask from 'react-input-mask'
 import { cn } from '~/lib/utils'
 
 interface MaskInputProps extends InputProps {

@@ -26,40 +26,38 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps<string>>(
     }
 
     return (
-      <>
-        <Flex
-          direction={'column'}
-          align={'start'}
-          gap={8}
-          fill
+      <Flex
+        direction={'column'}
+        align={'start'}
+        gap={8}
+        fill
+      >
+        {label && <Label>{label}</Label>}
+
+        <select
+          ref={ref}
+          className={cn(
+            'max-w-[19rem] w-full p-3 rounded-md outline-none border bg-transparent text-popover-foreground shadow-md animate-in fade-in-80'
+          )}
+          onChange={onChangeHandler}
+          id={id}
+          {...props}
         >
-          {label && <Label>{label}</Label>}
+          {options.map((option) => (
+            <option
+              className={cn(
+                'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50'
+              )}
+              key={option.value}
+              {...option}
+            >
+              {option.content}
+            </option>
+          ))}
+        </select>
 
-          <select
-            ref={ref}
-            className={cn(
-              'max-w-[19rem] w-full p-3 rounded-md outline-none border bg-transparent text-popover-foreground shadow-md animate-in fade-in-80'
-            )}
-            onChange={onChangeHandler}
-            id={id}
-            {...props}
-          >
-            {options.map((option) => (
-              <option
-                className={cn(
-                  'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50'
-                )}
-                key={option.value}
-                {...option}
-              >
-                {option.content}
-              </option>
-            ))}
-          </select>
-
-          {error && <Label className='text-destructive'>{error.message}</Label>}
-        </Flex>
-      </>
+        {error && <Label className='text-destructive'>{error.message}</Label>}
+      </Flex>
     )
   }
 )

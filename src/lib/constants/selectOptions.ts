@@ -1,4 +1,4 @@
-export const Options = [
+export const SelectOptions = [
   {
     value: 'Не выбрано',
     content: 'Не выбрано',

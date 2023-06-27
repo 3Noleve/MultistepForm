@@ -8,12 +8,7 @@ import {
   Button,
   Flex,
   Form,
-  FormControl,
-  FormDescription,
   FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
   Input,
   InputMask
 } from '~/components/ui'
@@ -78,9 +73,10 @@ const AuthForm = () => {
                 label='Номер телефона'
                 type='phone'
                 mask='+7 (999) 999-99-99'
-                placeholder='+7 (800) 555-35-35'
+                placeholder={phone!}
                 error={errors.phone}
                 required
+                disabled
                 {...field}
               />
             )}
@@ -89,7 +85,7 @@ const AuthForm = () => {
           <Input
             disabled
             {...register('email')}
-            placeholder='johndoe@gmail.com'
+            placeholder={email!}
             label='Email'
             type='email'
             error={errors.email}

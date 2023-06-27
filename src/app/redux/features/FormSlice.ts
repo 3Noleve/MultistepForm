@@ -22,8 +22,8 @@ const initialState: FormSchema = {
   checkbox: [],
   radio: null,
   about: '',
-  email: null,
-  phone: null
+  email: 'johndoe@gmail.com',
+  phone: '+7 (800) 555-35-35'
 }
 
 const FormSlice = createSlice({
