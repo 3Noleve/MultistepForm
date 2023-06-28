@@ -1,18 +1,16 @@
 'use client'
 
-import { useCallback, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-
-import { SubmitHandler, useForm } from 'react-hook-form'
-
-import useFormPersist from 'react-hook-form-persist'
+import { useCallback, useEffect, useMemo } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import useFormPersist from 'react-hook-form-persist'
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { StatusActions } from '~/app/redux/features/StepSlice'
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { AboutFormInput } from '~/app/types'
-import { aboutSchema } from '~/lib/schemas'
 import { Button, Flex, Textarea } from '~/components/ui'
+import { aboutSchema } from '~/lib/schemas'
 
 const page = () => {
   const router = useRouter()

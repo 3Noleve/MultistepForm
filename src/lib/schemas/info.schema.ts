@@ -1,5 +1,5 @@
-import * as Yup from 'yup';
-import { InfoFormInputs } from '~/app/types';
+import * as Yup from 'yup'
+import { InfoFormInputs } from '~/app/types'
 
 export const infoSchema = Yup.object({
   nickname: Yup.string()
@@ -17,5 +17,5 @@ export const infoSchema = Yup.object({
 
   sex: Yup.mixed<InfoFormInputs['sex']>()
     .required('Поле обязательно')
-    .oneOf(['man', 'woman'], 'Значение должно быть "man" или "woman"'),
-});
+    .oneOf(['man', 'woman'], 'Значение должно быть "man" или "woman"')
+})

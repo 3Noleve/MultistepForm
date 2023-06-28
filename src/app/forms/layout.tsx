@@ -6,7 +6,7 @@ interface FormsLayoutProps {
 
 export default function FormsLayout({ children }: FormsLayoutProps) {
   return (
-    <Flex className='rounded-3xl mt-6 bg-primary-foreground py-16 px-28'>
+    <Flex className='mt-6 rounded-3xl bg-primary-foreground px-28 py-16'>
       {children}
     </Flex>
   )

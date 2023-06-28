@@ -1,5 +1,5 @@
-import { Profile } from '~/components'
 import AuthPage from '~/app/auth/auth'
+import { Profile } from '~/components'
 
 const HomePage = () => {
   return (

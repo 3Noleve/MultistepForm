@@ -2,9 +2,9 @@
 
 import { forwardRef } from 'react'
 import ReactInputMask from 'react-input-mask'
-import { InputProps } from './input'
-import { Flex, Label } from '.'
 import { cn } from '~/lib/utils'
+import { Flex, Label } from '.'
+import { InputProps } from './input'
 
 interface MaskInputProps extends InputProps {
   mask?: string | Array<string | RegExp>

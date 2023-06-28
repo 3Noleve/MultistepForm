@@ -1,10 +1,10 @@
 'use client'
 
-import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
-
+import { cva } from 'class-variance-authority'
 import { cn } from '~/lib/utils'
 import { Flex, Label } from '.'
+import type { VariantProps } from 'class-variance-authority'
 
 const avatarContainer = cva('w-full rounded-full', {
   variants: {
@@ -57,7 +57,7 @@ const Avatar = ({ className, src, size, alt, initials }: AvatarProps) => {
           src={src}
           alt={alt}
           className={cn(
-            'h-36 w-36 rounded-full object-cover bg-transparent',
+            'h-36 w-36 rounded-full bg-transparent object-cover',
             className
           )}
         />

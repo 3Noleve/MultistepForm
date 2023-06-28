@@ -1,9 +1,12 @@
 'use client'
 
-import { useEffect } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { FormSliceActions } from '~/app/redux/features/FormSlice'
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
+import { AuthFormInputs } from '~/app/types'
 import {
   Button,
   Flex,
@@ -12,9 +15,6 @@ import {
   Input,
   InputMask
 } from '~/components/ui'
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
-import { FormSliceActions } from '~/app/redux/features/FormSlice'
-import { AuthFormInputs } from '~/app/types'
 import { authSchema } from '~/lib/schemas'
 
 const AuthForm = () => {

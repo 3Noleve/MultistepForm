@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import { Flex, Label } from '.'
 import { cn } from '~/lib/utils'
+import { Flex, Label } from '.'
 
 interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: number

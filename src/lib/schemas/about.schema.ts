@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
 export const aboutSchema = Yup.object().shape({
   field: Yup.string()
@@ -6,6 +6,6 @@ export const aboutSchema = Yup.object().shape({
     .test(
       'len',
       'Максимальная длина - 200 символов',
-      (val) => val!.replace(/\s/g, '').length <= 200,
-    ),
-});
+      (val) => val!.replace(/\s/g, '').length <= 200
+    )
+})

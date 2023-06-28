@@ -1,3 +1,3 @@
 export interface AboutFormInput {
-  field: string;
+  field: string
 }

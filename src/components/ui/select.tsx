@@ -1,7 +1,7 @@
 import { ChangeEvent, forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
-import { Flex, Label } from '.'
 import { cn } from '~/lib/utils'
+import { Flex, Label } from '.'
 
 interface Options<T extends string> {
   value: T
@@ -37,7 +37,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps<string>>(
         <select
           ref={ref}
           className={cn(
-            'max-w-[19rem] w-full p-3 rounded-md outline-none border bg-transparent text-popover-foreground shadow-md animate-in fade-in-80'
+            'w-full max-w-[19rem] rounded-md border bg-transparent p-3 text-popover-foreground shadow-md outline-none animate-in fade-in-80'
           )}
           onChange={onChangeHandler}
           id={id}

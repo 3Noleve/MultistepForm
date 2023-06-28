@@ -1,19 +1,17 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect } from 'react'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useFormPersist from 'react-hook-form-persist'
-import { yupResolver } from '@hookform/resolvers/yup'
-import Link from 'next/link'
-
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { StatusActions } from '~/app/redux/features/StepSlice'
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { InfoFormInputs } from '~/app/types'
-import { infoSchema } from '~/lib/schemas'
-import { SelectOptions } from '~/lib/constants'
-
 import { Button, Flex, FormField, Input, Select } from '~/components/ui'
+import { SelectOptions } from '~/lib/constants'
+import { infoSchema } from '~/lib/schemas'
 
 const page = () => {
   const { sex, name, surname, nickname } = useAppSelector(

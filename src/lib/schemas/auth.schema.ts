@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
 export const authSchema = Yup.object({
   phone: Yup.string()
@@ -8,5 +8,5 @@ export const authSchema = Yup.object({
   email: Yup.string()
     .matches(/^[^\s@]+@[^\s@]+\.(ru|com)$/i, 'Неверный формат')
     .email('Неверный формат email')
-    .required('Обязательное поле'),
-});
+    .required('Обязательное поле')
+})

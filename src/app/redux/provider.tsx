@@ -1,7 +1,7 @@
 'use client'
 
-import { setupStore } from '~/app/redux/store'
 import { Provider } from 'react-redux'
+import { setupStore } from '~/app/redux/store'
 
 const store = setupStore()
 

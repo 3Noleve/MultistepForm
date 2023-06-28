@@ -1,8 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Avatar, Flex, Label } from '../ui'
-import Link from 'next/link'
 
 interface Socials {
   url: string

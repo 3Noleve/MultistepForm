@@ -1,8 +1,7 @@
 import * as React from 'react'
-
 import { FieldError } from 'react-hook-form'
-import { cn } from '~/lib/utils'
 import { Flex, Label } from '~/components/ui'
+import { cn } from '~/lib/utils'
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -32,7 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
 
         {error && (
-          <Label className='text-destructive mt-1'>{error.message}</Label>
+          <Label className='mt-1 text-destructive'>{error.message}</Label>
         )}
       </Flex>
     )

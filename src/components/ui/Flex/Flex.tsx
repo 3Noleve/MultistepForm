@@ -1,5 +1,5 @@
-import { cva, VariantProps } from 'class-variance-authority'
 import { HtmlHTMLAttributes } from 'react'
+import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '~/lib/utils'
 
 export const FlexVariants = cva('flex', {

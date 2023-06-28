@@ -1,11 +1,10 @@
 'use client'
 
-import InfoPage from '~/app/forms/_info/page'
-import AdvantagesPage from '~/app/forms/_advantages/page'
 import AboutPage from '~/app/forms/_about/page'
-
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
+import AdvantagesPage from '~/app/forms/_advantages/page'
+import InfoPage from '~/app/forms/_info/page'
 import { StatusActions } from '~/app/redux/features/StepSlice'
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { Stepper } from '~/components'
 import { LABELS } from '~/lib/constants'
 

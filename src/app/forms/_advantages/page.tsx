@@ -1,37 +1,29 @@
 'use client'
 
 import { memo, useCallback, useEffect } from 'react'
-
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Plus, Trash2Icon } from 'lucide-react'
 import {
   SubmitHandler,
   useController,
   useFieldArray,
   useForm
 } from 'react-hook-form'
-
 import useFormPersist from 'react-hook-form-persist'
-
-import { yupResolver } from '@hookform/resolvers/yup'
-
-import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
-import { StatusActions } from '~/app/redux/features/StepSlice'
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
-
+import { StatusActions } from '~/app/redux/features/StepSlice'
+import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { AdvantagesFormInputs } from '~/app/types'
-
-import { advantagesSchema } from '~/lib/schemas'
-
 import {
-  Label,
-  Input,
-  Flex,
   Button,
-  FormField,
   Checkbox,
+  Flex,
+  FormField,
+  Input,
+  Label,
   Radio
 } from '~/components/ui'
-
-import { Trash2Icon, Plus } from 'lucide-react'
+import { advantagesSchema } from '~/lib/schemas'
 
 const page = () => {
   const { advantages, checkbox, radio } = useAppSelector(
@@ -176,7 +168,7 @@ const page = () => {
           <Flex
             align={'center'}
             justify={'center'}
-            className='border-2 border-primary rounded w-10 h-10'
+            className='h-10 w-10 rounded border-2 border-primary'
           >
             <Button
               variant={'icon'}
@@ -206,7 +198,7 @@ const page = () => {
               />
             ))}
 
-          <Label className='text-destructive mt-1'>
+          <Label className='mt-1 text-destructive'>
             {errors.checkbox && errors.checkbox?.message}
           </Label>
         </Flex>
@@ -228,7 +220,7 @@ const page = () => {
               />
             ))}
 
-          <Label className='text-destructive mt-1'>
+          <Label className='mt-1 text-destructive'>
             {errors.radio && errors.radio.message}
           </Label>
         </Flex>
