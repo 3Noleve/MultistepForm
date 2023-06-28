@@ -1,2 +1,2 @@
 export * from './selectOptions'
-export * from './stepperLabels'
+export * from './stepperSteps'

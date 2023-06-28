@@ -6,7 +6,7 @@ import InfoPage from '~/app/forms/_info/page'
 import { StatusActions } from '~/app/redux/features/StepSlice'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { Stepper } from '~/components'
-import { LABELS } from '~/lib/constants'
+import { STEPS } from '~/lib/constants'
 
 const page = () => {
   const { currentStep } = useAppSelector((state) => state.StepReducer)
@@ -32,11 +32,11 @@ const page = () => {
 
   return (
     <div className='w-full'>
-      {/* <Stepper
+      <Stepper
         onStepClick={(step) => dispatch(StatusActions.setCurrentStep(step))}
         currentStep={currentStep}
-        labels={LABELS}
-      /> */}
+        steps={STEPS}
+      />
 
       {currentPage}
     </div>
