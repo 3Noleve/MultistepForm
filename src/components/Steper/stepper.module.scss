@@ -26,6 +26,7 @@
         align-items: center;
         justify-content: center;
         z-index: 1;
+        cursor: pointer;
 
         svg {
           display: none;
@@ -39,7 +40,7 @@
       left: 0;
       width: calc(100% + 10px);
       height: 8px;
-      background-color: $c-black-08;
+      background-color: #cbd5e1;
       border-radius: 8px;
       transition: 0.4s ease-in-out;
     }
@@ -85,7 +86,7 @@
     &.stepActive {
       .label {
         span {
-          color: $c-highlight;
+          color: #f1f5f9;
         }
       }
     }

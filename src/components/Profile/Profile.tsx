@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { Avatar, Flex, Label } from '../ui'
 
 interface Socials {
@@ -15,8 +14,6 @@ interface ProfileProps {
 }
 
 export const Profile = ({ fullName, socials }: ProfileProps) => {
-  const router = useRouter()
-
   const initials = fullName.split(' ') as [string, string]
 
   return (

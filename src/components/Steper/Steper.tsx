@@ -3,13 +3,18 @@ import { cn } from '~/lib/utils'
 import { Label } from '../ui'
 import styles from './stepper.module.scss'
 
-interface StepperProps {
+interface StepperProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   currentStep: number
   steps: number
   onStepClick: (step: number) => void
 }
 
-export const Stepper = ({ currentStep, steps, onStepClick }: StepperProps) => {
+export const Stepper = ({
+  currentStep,
+  steps,
+  onStepClick,
+  ...props
+}: StepperProps) => {
   return (
     <div className={cn(styles.wrapper, 'mb-10')}>
       {Array(steps)
@@ -18,7 +23,7 @@ export const Stepper = ({ currentStep, steps, onStepClick }: StepperProps) => {
           <div
             onClick={() => onStepClick(index + 1)}
             key={index}
-            className={cn(styles.step, 'transition-all duration-200 ease-out', {
+            className={cn(styles.step, {
               [styles.stepActive]: currentStep === index + 1,
               [styles.stepCompleted]: currentStep > index + 1
             })}

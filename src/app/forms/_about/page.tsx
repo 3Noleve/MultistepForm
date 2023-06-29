@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useFormPersist from 'react-hook-form-persist'
@@ -10,9 +10,14 @@ import { StatusActions } from '~/app/redux/features/StepSlice'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { AboutFormInput } from '~/app/types'
 import { Button, Flex, Textarea } from '~/components/ui'
+import { Modal } from '~/components/ui/Modal/modal'
 import { aboutSchema } from '~/lib/schemas'
+import { api } from '~/lib/api'
 
 const page = () => {
+  const [active, setActive] = useState<boolean>(false)
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
+
   const router = useRouter()
 
   const { about } = useAppSelector((state) => state.FormReducer)
@@ -44,14 +49,12 @@ const page = () => {
     storage: window.localStorage
   })
 
-  const clearLocalStorage = useMemo(() => {
-    return () => {
-      Object.keys(window.localStorage).forEach((key) => {
-        if (key.includes('-form')) {
-          window.localStorage.removeItem(key)
-        }
-      })
-    }
+  const clearLocalStorage = useCallback(() => {
+    Object.keys(localStorage).forEach((key) => {
+      if (key.includes('-form')) {
+        localStorage.removeItem(key)
+      }
+    })
   }, [])
 
   const charsLength = watch('field').replace(/\s+/g, '').length
@@ -62,7 +65,7 @@ const page = () => {
     dispatch(FormSliceActions.setAbout(message))
 
     if (isValid) {
-      const response = await fetch('http://localhost:3004/posts', {
+      const response = await fetch(api, {
         method: 'POST',
         body: JSON.stringify({ ...formData, about: message }),
         headers: {
@@ -71,16 +74,29 @@ const page = () => {
       })
 
       if (!response.ok) {
-        return console.warn('Error')
+        setIsSuccess(false)
+        setActive(true)
+      } else {
+        setIsSuccess(true)
+        setActive(true)
+
+        clearLocalStorage()
+        reset()
       }
-
-      clearLocalStorage()
-
-      reset()
-
-      router.push('/')
     }
   }
+
+  const handleModalClick = useCallback(() => {
+    if (!isSuccess) {
+      setActive(false)
+      return
+    }
+
+    dispatch(StatusActions.setCurrentStep(1))
+    dispatch(FormSliceActions.reset())
+
+    router.push('/')
+  }, [dispatch, isSuccess, router, clearLocalStorage])
 
   const handlePrevStep = useCallback(() => {
     dispatch(StatusActions.setCurrentStep(currentStep - 1))
@@ -95,37 +111,53 @@ const page = () => {
   }, [])
 
   return (
-    <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <Flex
-        direction={'column'}
-        align={'start'}
-        gap={24}
-      >
-        <Textarea
-          placeholder='Введите текст...'
-          label='About'
-          error={errors.field}
-          chars={charsLength}
-          maxChars={200}
-          {...register('field')}
-        />
-
+    <>
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
         <Flex
-          direction={'row'}
-          justify={'between'}
-          gap={8}
-          fill
+          direction={'column'}
+          align={'start'}
+          gap={24}
         >
-          <Button
-            variant={'outline'}
-            onClick={handlePrevStep}
+          <Textarea
+            placeholder='Введите текст...'
+            label='About'
+            error={errors.field}
+            chars={charsLength}
+            maxChars={200}
+            {...register('field')}
+          />
+
+          <Flex
+            direction={'row'}
+            justify={'between'}
+            gap={8}
+            fill
           >
-            Назад
-          </Button>
-          <Button type='submit'>Отправить</Button>
+            <Button
+              variant={'outline'}
+              onClick={handlePrevStep}
+            >
+              Назад
+            </Button>
+            <Button type='submit'>Отправить</Button>
+          </Flex>
         </Flex>
-      </Flex>
-    </form>
+      </form>
+
+      <Modal
+        active={active}
+        setActive={setActive}
+        isSuccess={isSuccess}
+      >
+        <Flex direction={'row'}>
+          {isSuccess ? (
+            <Button onClick={handleModalClick}>На Главную</Button>
+          ) : (
+            <Button onClick={handleModalClick}>Закрыть</Button>
+          )}
+        </Flex>
+      </Modal>
+    </>
   )
 }
 

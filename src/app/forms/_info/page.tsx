@@ -30,6 +30,7 @@ const page = () => {
     setValue,
     formState: { errors, isValid }
   } = useForm<InfoFormInputs>({
+    mode: 'all',
     resolver: yupResolver(infoSchema),
     defaultValues: {
       sex,

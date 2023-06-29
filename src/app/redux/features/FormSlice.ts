@@ -67,6 +67,9 @@ const FormSlice = createSlice({
 
     setAbout(state, action: PayloadAction<string>) {
       state.about = action.payload
+    },
+    reset() {
+      return initialState
     }
   }
 })

@@ -1,2 +1,5 @@
 export * from './Profile/Profile'
 export * from './Steper/Steper'
+export * from './ui/Flex/Flex'
+export * from './ui/index'
+export * from './Icons/Icons'

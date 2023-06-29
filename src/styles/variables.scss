@@ -1,15 +1,28 @@
-$c-text: #9ca8b1;
-$c-background: #f4f4f5;
-$c-primary: #333333;
-$c-secondary: #ffffff;
-$c-highlight: #5558fa;
-$c-accent: #a6a6a6;
-$c-black-04: rgba(0, 0, 0, 0.04);
-$c-black-08: rgba(0, 0, 0, 0.08);
-$c-black-16: rgba(0, 0, 0, 0.16);
-$c-black-48: rgba(0, 0, 0, 0.48);
-$c-black-24: rgba(0, 0, 0, 0.24);
-$c-gray-100: #212830;
-$c-blue-100: #d5e4f7;
-$c-red-15: rgba(232, 78, 88, 0.15);
-$c-green-15: rgba(5, 174, 113, 0.15);
+$text-white-color: #fff;
+$text-black-color: #000;
+$text-primary-color: #333;
+$text-ebony-color: #212830;
+$text-secondary-color: rgba($text-black-color, 0.48);
+$text-uppercase-color: #212830;
+$text-error-color: red;
+
+/* background */
+$bg-primary: #f4f4f5;
+$bg-secondary: #fff;
+$bg-silver: #a6a6a6;
+$bg-silver-transparent: rgba(0, 0, 0, 0.16);
+$bg-success: rgba(5, 174, 113, 0.15);
+$bg-failed: rgba(232, 78, 88, 0.15);
+
+$additional: #5558fa;
+$avatar: #d5e4f7;
+$box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+
+/* borders */
+$border-additional: 1px solid $additional;
+$border-transparent: 1px solid transparent;
+$border-alpha: 1px solid rgba(0, 0, 0, 0.16);
+
+/* transitions */
+$transition: 0.3s all ease;
+$transition-modal: 0.5s all ease;
