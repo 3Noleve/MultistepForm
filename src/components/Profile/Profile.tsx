@@ -11,10 +11,9 @@ interface Socials {
 
 interface ProfileProps {
   fullName: `${string} ${string}`
-  socials?: Socials[]
 }
 
-export const Profile = ({ fullName, socials }: ProfileProps) => {
+export const Profile = ({ fullName }: ProfileProps) => {
   const initials = fullName.split(' ') as [string, string]
 
   return (
@@ -24,7 +23,7 @@ export const Profile = ({ fullName, socials }: ProfileProps) => {
       gap={24}
       className='mb-6 pb-6'
     >
-      <Link href={'https://github.com/3Noleve'}>
+      <Link href={'https://t.me/noleve3'}>
         <Avatar
           initials={initials}
           src={'https://avatars.githubusercontent.com/u/106100900?v=4'}
@@ -32,18 +31,10 @@ export const Profile = ({ fullName, socials }: ProfileProps) => {
       </Link>
 
       <div>
-        <Label className='text-xl'>{fullName}</Label>
+        <Label className='cursor-pointer text-xl'>
+          <a href={'https://t.me/noleve3'}>{fullName}</a>
+        </Label>
       </div>
-
-      {socials && (
-        <Flex
-          direction={'row'}
-          gap={16}
-          fill
-        >
-          Lorem
-        </Flex>
-      )}
     </Flex>
   )
 }
