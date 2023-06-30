@@ -101,7 +101,7 @@ const AboutPage = () => {
 
   const handlePrevStep = useCallback(() => {
     dispatch(StatusActions.setCurrentStep(currentStep - 1))
-  }, [currentStep])
+  }, [currentStep, dispatch])
 
   useEffect(() => {
     return () => {
@@ -109,6 +109,7 @@ const AboutPage = () => {
 
       dispatch(FormSliceActions.setAbout(field))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -58,6 +58,7 @@ const InfoPage = () => {
       dispatch(FormSliceActions.setSurname(surname))
       dispatch(FormSliceActions.setSex(sex))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

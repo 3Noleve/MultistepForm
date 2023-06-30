@@ -53,6 +53,7 @@ const AuthForm = () => {
 
       dispatch(FormSliceActions.setPhone(phone && phone.replace(/[^\d]/g, '')))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

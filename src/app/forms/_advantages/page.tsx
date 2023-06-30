@@ -105,7 +105,7 @@ const AdvantagesPage = () => {
 
   const handlePrevStep = useCallback(() => {
     dispatch(StatusActions.setCurrentStep(currentStep - 1))
-  }, [currentStep])
+  }, [currentStep, dispatch])
 
   useEffect(() => {
     return () => {
@@ -115,6 +115,7 @@ const AdvantagesPage = () => {
       dispatch(FormSliceActions.setCheckbox(checkbox))
       dispatch(FormSliceActions.setRadio(+radio))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onSubmitHandler: SubmitHandler<AdvantagesFormInputs> = () => {
@@ -138,7 +139,7 @@ const AdvantagesPage = () => {
           <Label>Advantages</Label>
 
           {fields.map((advantage, index) => (
-            <div>
+            <div key={advantage.id}>
               <FormField
                 key={advantage.id}
                 control={control}
@@ -192,6 +193,7 @@ const AdvantagesPage = () => {
             .fill(0)
             .map((_, index) => (
               <Checkbox
+                key={index}
                 label={index + 1}
                 value={index + 1}
                 checked={value.includes(index + 1)}
@@ -214,6 +216,7 @@ const AdvantagesPage = () => {
             .fill(0)
             .map((_, index) => (
               <Radio
+                key={index}
                 label={index + 1}
                 value={index + 1}
                 checked={radioValue === index + 1}
