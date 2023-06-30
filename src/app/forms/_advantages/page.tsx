@@ -54,7 +54,7 @@ const AdvantagesPage = () => {
   useFormPersist('advantages-form', {
     watch,
     setValue,
-    storage: localStorage
+    storage: window && window.localStorage
   })
 
   const { fields, append, remove } = useFieldArray({

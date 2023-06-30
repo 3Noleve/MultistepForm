@@ -47,7 +47,7 @@ const AboutPage = () => {
   useFormPersist('about-form', {
     watch,
     setValue,
-    storage: localStorage
+    storage: window && window.localStorage
   })
 
   const clearLocalStorage = useCallback(() => {
