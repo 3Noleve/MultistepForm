@@ -51,11 +51,12 @@ const AboutPage = () => {
   })
 
   const clearLocalStorage = useCallback(() => {
-    Object.keys(localStorage).forEach((key) => {
-      if (key.includes('-form')) {
-        localStorage.removeItem(key)
-      }
-    })
+    typeof window !== undefined &&
+      Object.keys(localStorage).forEach((key) => {
+        if (key.includes('-form')) {
+          localStorage.removeItem(key)
+        }
+      })
   }, [])
 
   const charsLength = watch('field').replace(/\s+/g, '').length
