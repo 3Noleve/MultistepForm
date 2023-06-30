@@ -59,6 +59,8 @@ const Avatar = ({ className, src, size, alt, initials }: AvatarProps) => {
         <Image
           src={src}
           alt={alt!}
+          width={144}
+          height={144}
           className={cn(
             'h-36 w-36 rounded-full bg-transparent object-cover',
             className
