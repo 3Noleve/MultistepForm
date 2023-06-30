@@ -1,5 +1,7 @@
 import { Check } from 'lucide-react'
+
 import { cn } from '~/lib/utils'
+
 import { Label } from '../ui'
 import styles from './stepper.module.scss'
 

@@ -1,34 +1,31 @@
 'use client'
 
-import AboutPage from '~/app/forms/_about/page'
-import AdvantagesPage from '~/app/forms/_advantages/page'
-import InfoPage from '~/app/forms/_info/page'
+import { useMemo } from 'react'
+
+import { AboutPage, AdvantagesPage, InfoPage } from '~/app/forms'
 import { StatusActions } from '~/app/redux/features/StepSlice'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { Stepper } from '~/components'
 import { STEPS } from '~/lib/constants'
 
-const page = () => {
+const MainFormPage = () => {
   const { currentStep } = useAppSelector((state) => state.StepReducer)
 
   const dispatch = useAppDispatch()
 
-  let currentPage: React.JSX.Element
+  const currentForm = useMemo(() => {
+    switch (currentStep) {
+      case 1:
+        return <InfoPage />
+      case 2:
+        return <AdvantagesPage />
+      case 3:
+        return <AboutPage />
 
-  switch (currentStep) {
-    case 1:
-      currentPage = <InfoPage />
-      break
-    case 2:
-      currentPage = <AdvantagesPage />
-      break
-    case 3:
-      currentPage = <AboutPage />
-      break
-
-    default:
-      return <InfoPage />
-  }
+      default:
+        return <InfoPage />
+    }
+  }, [currentStep])
 
   return (
     <div className='w-full'>
@@ -38,9 +35,9 @@ const page = () => {
         steps={STEPS}
       />
 
-      {currentPage}
+      {currentForm}
     </div>
   )
 }
 
-export default page
+export default MainFormPage

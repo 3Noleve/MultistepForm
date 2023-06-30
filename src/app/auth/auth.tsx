@@ -1,9 +1,10 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
+
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { AuthFormInputs } from '~/app/types'

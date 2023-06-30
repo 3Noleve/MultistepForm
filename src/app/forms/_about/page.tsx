@@ -1,20 +1,21 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useFormPersist from 'react-hook-form-persist'
+
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { StatusActions } from '~/app/redux/features/StepSlice'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { AboutFormInput } from '~/app/types'
 import { Button, Flex, Textarea } from '~/components/ui'
 import { Modal } from '~/components/ui/Modal/modal'
-import { aboutSchema } from '~/lib/schemas'
 import { api } from '~/lib/api'
+import { aboutSchema } from '~/lib/schemas'
 
-const page = () => {
+const AboutPage = () => {
   const [active, setActive] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
@@ -96,7 +97,7 @@ const page = () => {
     dispatch(FormSliceActions.reset())
 
     router.push('/')
-  }, [dispatch, isSuccess, router, clearLocalStorage])
+  }, [dispatch, isSuccess, router])
 
   const handlePrevStep = useCallback(() => {
     dispatch(StatusActions.setCurrentStep(currentStep - 1))
@@ -161,4 +162,4 @@ const page = () => {
   )
 }
 
-export default page
+export { AboutPage }

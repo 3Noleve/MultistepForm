@@ -1,4 +1,5 @@
 import * as Yup from 'yup'
+
 import { InfoFormInputs } from '~/app/types'
 
 export const infoSchema = Yup.object({

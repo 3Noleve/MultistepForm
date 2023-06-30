@@ -1,5 +1,7 @@
 import { forwardRef } from 'react'
+
 import { cn } from '~/lib/utils'
+
 import { Flex, Label } from '.'
 
 interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,3 +28,5 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     )
   }
 )
+
+Radio.displayName = 'Radio'

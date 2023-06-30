@@ -1,5 +1,5 @@
 const loading = () => {
-  return <div className=''>Loading...</div>
+  return <div className=''>Loading Form...</div>
 }
 
 export default loading

@@ -1,9 +1,11 @@
-import Image from 'next/image'
 import { Dispatch, SetStateAction } from 'react'
+import Image from 'next/image'
 import { X as Close } from 'lucide-react'
+
 import { Button, Flex, Icons, Label } from '~/components'
 import { useLockBody } from '~/lib/hooks'
 import { cn } from '~/lib/utils'
+
 import { Portal } from '../Portal/Portal'
 import styles from './modal.module.scss'
 

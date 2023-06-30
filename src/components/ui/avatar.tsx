@@ -1,10 +1,13 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { cva } from 'class-variance-authority'
+
 import { cn } from '~/lib/utils'
-import { Flex, Label } from '.'
 import type { VariantProps } from 'class-variance-authority'
+
+import { Flex, Label } from '.'
 
 const avatarContainer = cva('w-full rounded-full', {
   variants: {
@@ -53,9 +56,9 @@ const Avatar = ({ className, src, size, alt, initials }: AvatarProps) => {
       )}
     >
       {src && (
-        <img
+        <Image
           src={src}
-          alt={alt}
+          alt={alt!}
           className={cn(
             'h-36 w-36 rounded-full bg-transparent object-cover',
             className

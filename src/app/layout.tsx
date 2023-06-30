@@ -1,6 +1,9 @@
 import { Inter as FontSans } from 'next/font/google'
+
 import { ReduxProvider } from '~/app/redux/provider'
+
 import '../styles/globals.css'
+
 import { cn } from '~/lib/utils'
 
 const fontSans = FontSans({

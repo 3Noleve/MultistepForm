@@ -1,4 +1,4 @@
- {
+{
   "endOfLine": "lf",
   "tabWidth": 2,
   "printWidth": 80,
@@ -14,12 +14,23 @@
   "arrowParens": "always",
   "importOrder": [
     "^node:(.*)$",
-    "^(react|next(.*))$",
-    "<THIRD_PARTY_MODULES",
-    "^@/(.*)",
+    "^(react/(.*)$)|^(react$)",
+    "^(next/(.*)$)|^(next$)",
+    "<THIRD_PARTY_MODULES>",
+    "",
     "^~/(.*)",
-    "^[./",
-    "<TYPES",
+    "^@/(.*)",
+    "<TYPES>",
+    "^~/types/(.*)$",
+    "^~/config/(.*)$",
+    "^~/lib/(.*)$",
+    "^~/hooks/(.*)$",
+    "^~/components/ui/(.*)$",
+    "^~/components/(.*)$",
+    "^~/styles/(.*)$",
+    "^~/app/(.*)$",
+    "",
+    "^[./]",
     "^(.*)(sass|css|scss)"
   ],
   "importOrderSeparatio:": false,
@@ -27,5 +38,9 @@
   "importOrderBuiltinModulesToTop:": true,
   "importOrderParserPlugins:": ["typescript", "jsx", "decorators-legacy"],
   "importOrderMergeDuplicateImports:": true,
-  "importOrderCombineTypeAndValueImports:": true
+  "importOrderCombineTypeAndValueImports:": true,
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ]
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Plus, Trash2Icon } from 'lucide-react'
 import {
@@ -10,6 +10,7 @@ import {
   useForm
 } from 'react-hook-form'
 import useFormPersist from 'react-hook-form-persist'
+
 import { FormSliceActions } from '~/app/redux/features/FormSlice'
 import { StatusActions } from '~/app/redux/features/StepSlice'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
@@ -25,7 +26,7 @@ import {
 } from '~/components/ui'
 import { advantagesSchema } from '~/lib/schemas'
 
-const page = () => {
+const AdvantagesPage = () => {
   const { advantages, checkbox, radio } = useAppSelector(
     (state) => state.FormReducer
   )
@@ -245,4 +246,4 @@ const page = () => {
   )
 }
 
-export default page
+export { AdvantagesPage }

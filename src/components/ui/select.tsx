@@ -1,6 +1,8 @@
 import { ChangeEvent, forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
+
 import { cn } from '~/lib/utils'
+
 import { Flex, Label } from '.'
 
 interface Options<T extends string> {
@@ -61,3 +63,5 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps<string>>(
     )
   }
 )
+
+Select.displayName = 'Select'

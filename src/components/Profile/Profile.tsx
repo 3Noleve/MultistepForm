@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+
 import { Avatar, Flex, Label } from '../ui'
 
 interface Socials {
