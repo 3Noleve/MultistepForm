@@ -4,7 +4,7 @@ import '../styles/globals.css'
 import { cn } from '~/lib/utils'
 
 const fontSans = FontSans({
-  subsets: ['latin'],
+  subsets: ['latin-ext'],
   variable: '--font-sans'
 })
 
