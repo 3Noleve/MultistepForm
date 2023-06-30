@@ -47,16 +47,15 @@ const AboutPage = () => {
   useFormPersist('about-form', {
     watch,
     setValue,
-    storage: window.localStorage
+    storage: localStorage
   })
 
   const clearLocalStorage = useCallback(() => {
-    typeof window !== undefined &&
-      Object.keys(localStorage).forEach((key) => {
-        if (key.includes('-form')) {
-          localStorage.removeItem(key)
-        }
-      })
+    Object.keys(localStorage).forEach((key) => {
+      if (key.includes('-form')) {
+        localStorage.removeItem(key)
+      }
+    })
   }, [])
 
   const charsLength = watch('field').replace(/\s+/g, '').length
