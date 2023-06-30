@@ -7,7 +7,7 @@ const loading = () => {
       justify={'center'}
       className='h-screen'
     >
-      <Label className='text-2xl'>Loading...</Label>
+      <Label>Loading Form...</Label>
     </Flex>
   )
 }
