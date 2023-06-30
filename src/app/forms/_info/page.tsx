@@ -130,4 +130,4 @@ const InfoPage = () => {
   )
 }
 
-export default InfoPage
+export { InfoPage }

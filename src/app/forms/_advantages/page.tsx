@@ -249,4 +249,4 @@ const AdvantagesPage = () => {
   )
 }
 
-export default AdvantagesPage
+export { AdvantagesPage }
