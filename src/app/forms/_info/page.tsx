@@ -44,7 +44,7 @@ const InfoPage = () => {
   useFormPersist('info-form', {
     watch,
     setValue,
-    storage: window && window.localStorage
+    storage: typeof window !== 'undefined' ? window.localStorage : undefined
   })
 
   const onSubmitHandler: SubmitHandler<InfoFormInputs> = () => {
