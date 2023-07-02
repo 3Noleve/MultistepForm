@@ -11,12 +11,7 @@ interface StepperProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   onStepClick: (step: number) => void
 }
 
-export const Stepper = ({
-  currentStep,
-  steps,
-  onStepClick,
-  ...props
-}: StepperProps) => {
+export const Stepper = ({ currentStep, steps, onStepClick }: StepperProps) => {
   return (
     <div className={cn(styles.wrapper, 'mb-10')}>
       {Array(steps)

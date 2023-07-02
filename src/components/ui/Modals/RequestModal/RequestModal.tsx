@@ -1,29 +1,31 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 import Image from 'next/image'
 import { X as Close } from 'lucide-react'
 
 import { Button, Flex, Icons, Label } from '~/components'
+import { Portal } from '~/components/ui/Portal'
 import { useLockBody } from '~/lib/hooks'
 import { cn } from '~/lib/utils'
 
-import { Portal } from '../Portal/Portal'
-import styles from './modal.module.scss'
+import styles from './request-modal.module.scss'
 
-interface ModalProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
+interface RequestModalProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
+  children: ReactNode
   active: boolean
   setActive: Dispatch<SetStateAction<boolean>>
   isSuccess: boolean
-  children: React.ReactNode
+  successTitle?: string
 }
 
-export const Modal = ({
+export const RequestModal = ({
+  children,
   active,
   setActive,
   isSuccess,
-  children,
+  successTitle,
   className,
   ...props
-}: ModalProps) => {
+}: RequestModalProps) => {
   useLockBody({ active })
 
   return (
@@ -55,7 +57,9 @@ export const Modal = ({
               fill
             >
               <Label className='mb-2 text-base'>
-                {isSuccess ? 'Форма успешно отправлена' : 'Ошибка'}
+                {isSuccess
+                  ? successTitle || 'Форма успешно отправлена'
+                  : 'Ошибка'}
               </Label>
 
               <Button
@@ -79,7 +83,6 @@ export const Modal = ({
                 />
               </div>
             </Flex>
-
             {children}
           </Flex>
         </div>

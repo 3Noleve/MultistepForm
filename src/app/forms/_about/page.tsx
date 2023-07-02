@@ -11,13 +11,14 @@ import { StatusActions } from '~/app/redux/features/StepSlice'
 import { useAppDispatch, useAppSelector } from '~/app/redux/hooks'
 import { AboutFormInput } from '~/app/types'
 import { Button, Flex, Textarea } from '~/components/ui'
-import { Modal } from '~/components/ui/Modal/modal'
+import { RequestModal, UserDataModal } from '~/components/ui/Modals'
 import { api } from '~/lib/api'
 import { aboutSchema } from '~/lib/schemas'
 
 const AboutPage = () => {
   const [active, setActive] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
+  const [userDataActive, setIsUserDataActive] = useState<boolean>(false)
 
   const router = useRouter()
 
@@ -87,6 +88,11 @@ const AboutPage = () => {
     }
   }
 
+  const handleShowUserData = useCallback(() => {
+    setActive(false)
+    setIsUserDataActive(true)
+  }, [])
+
   const handleModalClick = useCallback(() => {
     if (!isSuccess) {
       setActive(false)
@@ -146,19 +152,49 @@ const AboutPage = () => {
         </Flex>
       </form>
 
-      <Modal
-        active={active}
-        setActive={setActive}
-        isSuccess={isSuccess}
-      >
-        <Flex direction={'row'}>
-          {isSuccess ? (
-            <Button onClick={handleModalClick}>На Главную</Button>
-          ) : (
-            <Button onClick={handleModalClick}>Закрыть</Button>
-          )}
-        </Flex>
-      </Modal>
+      <>
+        <RequestModal
+          active={active}
+          setActive={setActive}
+          isSuccess={isSuccess}
+        >
+          <Flex direction={'row'}>
+            {isSuccess ? (
+              <Flex
+                justify={'between'}
+                gap={8}
+                fill
+              >
+                <Button onClick={handleModalClick}>На Главную</Button>
+                <Button
+                  variant={'outline'}
+                  onClick={handleShowUserData}
+                >
+                  Посмотреть свои Данные
+                </Button>
+              </Flex>
+            ) : (
+              <Button onClick={handleModalClick}>Закрыть</Button>
+            )}
+          </Flex>
+        </RequestModal>
+
+        <UserDataModal
+          active={userDataActive}
+          setActive={setIsUserDataActive}
+          formData={formData}
+        >
+          <Flex direction={'row'}>
+            <Flex
+              justify={'between'}
+              gap={8}
+              fill
+            >
+              <Button onClick={handleModalClick}>На Главную</Button>
+            </Flex>
+          </Flex>
+        </UserDataModal>
+      </>
     </>
   )
 }

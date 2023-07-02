@@ -1,19 +1,17 @@
 'use client'
 
+import { HtmlHTMLAttributes } from 'react'
 import Link from 'next/link'
+
+import { cn } from '~/lib/utils'
 
 import { Avatar, Flex, Label } from '../ui'
 
-interface Socials {
-  url: string
-  name: string
-}
-
-interface ProfileProps {
+interface ProfileProps extends HtmlHTMLAttributes<HTMLDivElement> {
   fullName: `${string} ${string}`
 }
 
-export const Profile = ({ fullName }: ProfileProps) => {
+export const Profile = ({ fullName, className, ...props }: ProfileProps) => {
   const initials = fullName.split(' ') as [string, string]
 
   return (
@@ -21,7 +19,8 @@ export const Profile = ({ fullName }: ProfileProps) => {
       direction={'row'}
       align={'center'}
       gap={24}
-      className='mb-6 pb-6'
+      className={cn('mb-6 pb-6')}
+      {...props}
     >
       <Link href={'https://t.me/noleve3'}>
         <Avatar

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface FormSchema {
+export interface FormSchema {
   nickname: string | null
   name: string | null
   surname: string | null

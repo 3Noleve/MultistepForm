@@ -73,6 +73,7 @@ const Avatar = ({ className, src, size, alt, initials }: AvatarProps) => {
           justify={'center'}
           align={'center'}
           direction={'row'}
+          className='w-20'
         >
           <Label className={cn(initialsSize({ size, className }))}>
             {name[0]}

@@ -1,6 +1,4 @@
 export * from './Flex/Flex'
-// export * from './Portal/Portal'
-// export * from './Modal/modal'
 export * from './button'
 export * from './input'
 export * from './label'
