@@ -1,7 +1,14 @@
+import { Metadata } from 'next'
+
 import { Flex } from '~/components/ui'
 
 interface FormsLayoutProps {
   children: React.ReactNode
+}
+
+export const metadata: Metadata = {
+  title: 'Страница Формы',
+  description: 'Введите свои данные в форму'
 }
 
 export default function FormsLayout({ children }: FormsLayoutProps) {

@@ -3,11 +3,12 @@ import { Flex, Label } from '~/components'
 const loading = () => {
   return (
     <Flex
-      align={'center'}
       justify={'center'}
-      className='h-screen'
+      align={'center'}
+      className='h-20'
+      fill
     >
-      <Label>Loading Form...</Label>
+      <Label className='text-2xl'>Loading Form...</Label>
     </Flex>
   )
 }

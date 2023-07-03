@@ -13,7 +13,7 @@ const fontSans = FontSans({
 
 export const metadata = {
   title: 'Главная страница',
-  description: 'Введите свои данные'
+  description: 'Здравствуйте!'
 }
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang='en'>
       <body
         className={cn(
-          'm-auto min-h-screen max-w-4xl bg-background bg-gray-300 px-4 font-sans antialiased',
+          'm-auto max-h-screen max-w-4xl bg-background bg-gray-300 px-4 font-sans antialiased',
           fontSans.variable
         )}
       >

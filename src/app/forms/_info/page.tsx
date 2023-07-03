@@ -134,4 +134,4 @@ const InfoPage = () => {
   )
 }
 
-export { InfoPage }
+export default InfoPage
