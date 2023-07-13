@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.wrapper {
+  @include tablet {
+    padding: 32px 55px 40px;
+  }
+
+  @include small-tablet {
+    padding: 16px 22px 20px;
+  }
+}

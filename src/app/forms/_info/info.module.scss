@@ -1,0 +1,14 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.wrapper {
+  @include mobile {
+    margin-bottom: 25px;
+  }
+}
+
+.buttons {
+  @include mobile {
+    justify-content: space-around;
+  }
+}

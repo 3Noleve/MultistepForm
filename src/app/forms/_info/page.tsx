@@ -13,6 +13,9 @@ import { InfoFormInputs } from '~/app/types'
 import { Button, Flex, FormField, Input, Select } from '~/components/ui'
 import { SelectOptions } from '~/lib/constants'
 import { infoSchema } from '~/lib/schemas'
+import { cn } from '~/lib/utils'
+
+import styles from './info.module.scss'
 
 const InfoPage = () => {
   const { sex, name, surname, nickname } = useAppSelector(
@@ -71,7 +74,7 @@ const InfoPage = () => {
         direction={'column'}
         gap={32}
         align={'start'}
-        className='mb-[88px]'
+        className={cn(styles.wrapper, 'mb-[88px]')}
       >
         <Input
           label='Nickname'
@@ -123,6 +126,7 @@ const InfoPage = () => {
         justify={'between'}
         gap={8}
         fill
+        className={cn(styles.buttons)}
       >
         <Link href='/'>
           <Button variant={'outline'}>Назад</Button>
