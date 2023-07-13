@@ -7,6 +7,10 @@
   }
 
   @include small-tablet {
+    padding: 22px 34px 32px;
+  }
+
+  @include mobile {
     padding: 16px 22px 20px;
   }
 }

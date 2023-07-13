@@ -6,6 +6,10 @@ import '../styles/globals.css'
 
 import { cn } from '~/lib/utils'
 
+interface RootLayoutProps {
+  children: React.ReactNode
+}
+
 const fontSans = FontSans({
   subsets: ['latin-ext'],
   variable: '--font-sans'
@@ -16,11 +20,7 @@ export const metadata = {
   description: 'Здравствуйте!'
 }
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
       <body

@@ -17,6 +17,9 @@ import {
   InputMask
 } from '~/components/ui'
 import { authSchema } from '~/lib/schemas'
+import { cn } from '~/lib/utils'
+
+import styles from './auth.module.scss'
 
 const AuthForm = () => {
   const { email, phone } = useAppSelector((state) => state.FormReducer)
@@ -98,7 +101,7 @@ const AuthForm = () => {
           disabled={isSubmitting}
           type={'submit'}
           id='button-start'
-          className='mt-12'
+          className={cn(styles.start, 'mt-12 w-full')}
         >
           Начать
         </Button>

@@ -1,14 +1,19 @@
-import AboutMeForm from '~/app/auth/page'
+import { HomePage } from '~/app/auth/page'
+import styles from '~/app/forms/layout.module.scss'
 import { Flex } from '~/components/ui'
+import { cn } from '~/lib/utils'
 
 export default function Home() {
   return (
     <Flex
       direction={'column'}
       align={'start'}
-      className='mt-6 rounded-3xl bg-primary-foreground px-28 py-16'
+      className={cn(
+        styles.wrapper,
+        'mt-6 rounded-3xl bg-primary-foreground px-28 py-16'
+      )}
     >
-      <AboutMeForm />
+      <HomePage />
     </Flex>
   )
 }

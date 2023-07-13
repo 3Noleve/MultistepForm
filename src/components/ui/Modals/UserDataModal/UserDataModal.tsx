@@ -55,14 +55,6 @@ export const UserDataModal = ({
               fill
             >
               <Label className='mb-2 text-base'>Ваши Данные</Label>
-
-              <Button
-                variant={'icon'}
-                className={styles.close}
-                onClick={() => setActive(false)}
-              >
-                <Close />
-              </Button>
             </Flex>
             <div>
               <pre className='mt-2 w-[330px] rounded-md bg-slate-950 p-4'>

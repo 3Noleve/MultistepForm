@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.wrapper {
+  padding-bottom: 24px;
+  border-bottom: #a8b3cf33;
+  margin-bottom: 24px;
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+}

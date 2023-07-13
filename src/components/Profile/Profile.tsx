@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { cn } from '~/lib/utils'
 
 import { Avatar, Flex, Label } from '../ui'
+import styles from './profile.module.scss'
 
 interface ProfileProps extends HtmlHTMLAttributes<HTMLDivElement> {
   fullName: `${string} ${string}`
@@ -19,7 +20,7 @@ export const Profile = ({ fullName, className, ...props }: ProfileProps) => {
       direction={'row'}
       align={'center'}
       gap={24}
-      className={cn('mb-6 pb-6')}
+      className={cn(styles.wrapper, 'mb-6 pb-6')}
       {...props}
     >
       <Link href={'https://t.me/noleve3'}>
