@@ -78,6 +78,8 @@
   right: 22px;
 
   @include mobile {
+    top: 1px;
+    right: 2px;
     max-width: 50px !important;
   }
 }

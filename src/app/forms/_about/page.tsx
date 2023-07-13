@@ -14,6 +14,9 @@ import { Button, Flex, Textarea } from '~/components/ui'
 import { RequestModal, UserDataModal } from '~/components/ui/Modals'
 import { api } from '~/lib/api'
 import { aboutSchema } from '~/lib/schemas'
+import { cn } from '~/lib/utils'
+
+import styles from './about.module.scss'
 
 const AboutPage = () => {
   const [active, setActive] = useState<boolean>(false)
@@ -165,8 +168,14 @@ const AboutPage = () => {
                 gap={8}
                 fill
               >
-                <Button onClick={handleModalClick}>На Главную</Button>
                 <Button
+                  className={cn(styles['modal-btn'])}
+                  onClick={handleModalClick}
+                >
+                  На Главную
+                </Button>
+                <Button
+                  className={cn(styles['modal-btn'])}
                   variant={'outline'}
                   onClick={handleShowUserData}
                 >
@@ -174,7 +183,12 @@ const AboutPage = () => {
                 </Button>
               </Flex>
             ) : (
-              <Button onClick={handleModalClick}>Закрыть</Button>
+              <Button
+                className={cn(styles['modal-btn'])}
+                onClick={handleModalClick}
+              >
+                Закрыть
+              </Button>
             )}
           </Flex>
         </RequestModal>

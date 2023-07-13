@@ -1,13 +1,13 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react'
-import { X as Close } from 'lucide-react'
 
 import { FormSchema } from '~/app/redux/features/FormSlice'
-import { Button, Flex, Label } from '~/components'
+import { Flex, Label } from '~/components'
 import { Portal } from '~/components/ui/Portal'
 import { useLockBody } from '~/lib/hooks'
 import { cn } from '~/lib/utils'
 
 import styles from '../RequestModal/request-modal.module.scss'
+import s from './user-data-modal.module.scss'
 
 interface UserDataModalProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   children: ReactNode
@@ -57,7 +57,12 @@ export const UserDataModal = ({
               <Label className='mb-2 text-base'>Ваши Данные</Label>
             </Flex>
             <div>
-              <pre className='mt-2 w-[330px] rounded-md bg-slate-950 p-4'>
+              <pre
+                className={cn(
+                  s['code-wrapper'],
+                  'mt-2 rounded-md bg-slate-950 p-4'
+                )}
+              >
                 <code className='text-white'>
                   {JSON.stringify(formData, null, 2)}
                 </code>
