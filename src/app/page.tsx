@@ -1,4 +1,4 @@
-import { HomePage } from '~/app/auth/page'
+import HomePage from '~/app/auth/page'
 import styles from '~/app/forms/layout.module.scss'
 import { Flex } from '~/components/ui'
 import { cn } from '~/lib/utils'
