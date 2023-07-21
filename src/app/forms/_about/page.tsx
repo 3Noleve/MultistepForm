@@ -64,6 +64,10 @@ const AboutPage = () => {
 
   const charsLength = watch('field').replace(/\s+/g, '').length
 
+   if (charsLength > 200) {
+    return;
+  }
+  
   const onSubmitHandler: SubmitHandler<AboutFormInput> = async (data) => {
     const message = data.field.replace(/\s+/g, ' ')
 
